@@ -1,57 +1,37 @@
 import React, { Component } from 'react';
 
 class Form extends Component {
-  constructor(props){
+  constructor(props) {
     super(props)
-
-    this.state= {
-      name: "",
-      password: ""
+    this.state = {
+        count: 0
     }
-    this.handleNameChange= this.handleNameChange.bind(this);
-    this.handlePasswordChange= this.handlePasswordChange.bind(this);
-    this.handleSubmit= this.handleSubmit.bind(this);
   }
 
-  handleNameChange(event){
-    this.setState({
-      name: event.target.value
-    });
+  onClick(e) {
+      this.setState({
+          count: this.state.count + 1
+      });
   }
-
-  handlePasswordChange(event){
-    this.setState({
-      password: event.target.value
-    });
-  }
-
-  handleSubmit(event){
-    alert("handleSubmit " + this.state.name + "  "+ this.state.password);
-
-    event.preventDefault();
-  }
-
+  
   render() {
     return (
-      <div>
+      <>
+                <div>
+                    <h2>Counter</h2>
+                    <h1>{this.state.count}</h1>
+                    <button onClick={this.onClick.bind(this)}>Count Up!!</button>
+                </div>
+                
+                <style>{`
+                    .counter-button {
+                        font-size: 1rem;
+                        padding: 5px 10px;
+                        color:  #585858;
+                    }
+                `}</style>
+            </>
 
-        <form onSubmit= {this.handleSubmit} >
-          <label>
-            name
-            <input type="text" name="name"  onChange={ this.handleNameChange}/>    
-            password
-            <input type="text" name="password"  onChange={ this.handlePasswordChange}/>     
-          </label>
-
-          <input type="submit"/>
-        </form>
-
-        {this.state.name}
-        <br/>
-
-        {this.state.password}
-
-      </div>
     );
   }
 }
